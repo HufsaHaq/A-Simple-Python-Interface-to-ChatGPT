@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+</head>
+<body>
+    <h1>Upload a File</h1>
+
+    {% if file_uploaded %}
+        <h2>File Uploaded Successfully</h2>
+        <div id="conversation">
+            {% for item in conversation %}
+            <p>User: {{ item['user'] }}</p>
+            <p>AI: {{ item['ai'] }}</p>
+            {% endfor %}
+        </div>
+        <form action="/ask" method="POST">
+            <label for="question">Question:</label>
+            <input type="text" name="question" id="question" required>
+            <br><br>
+            <input type="submit" value="Ask">
+        </form>
+    {% else %}
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <br><br>
+            <input type="submit" value="Upload">
+        </form>
+    {% endif %}
+</body>
+</html>
