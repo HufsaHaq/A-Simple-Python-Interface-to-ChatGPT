@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import PyPDF2
 import openai
 
-openai.api_key = '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'
+openai.api_key = '- your key -' # api key can be generated at https://platform.openai.com/account/api-keys
 
 app = Flask(__name__)
 
@@ -73,7 +73,7 @@ def chat_with_gpt(text, question):
     response = openai.Completion.create(
         engine='text-davinci-003',
         prompt=prompt,
-        max_tokens=50,
+        max_tokens=100,
         n=1,
         stop=None,
         temperature=0.7
