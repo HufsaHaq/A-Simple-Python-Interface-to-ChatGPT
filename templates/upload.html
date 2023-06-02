@@ -1,1 +1,39 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Interrogation Using CHATGPT by Hufsa Haq</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>PDF Interrogation Using CHATGPT by Hufsa Haq</h1>
+        <h1>Upload a File</h1>
+    </div>
+        {% if file_uploaded %}
+            <h2>File Uploaded Successfully</h2>
+            <div id="conversation">
+                {% for item in conversation %}
+                <p>User: {{ item['user'] }}</p>
+                <p>AI: {{ item['ai'] }}</p>
+                {% endfor %}
+            </div>
+            <form action="/ask" method="POST">
+                <label for="question">Question:</label>
+                <input type="text" name="question" id="question" required>
+                <br><br>
+                <input type="submit" value="Ask">
+            </form>
+            <form action="/back" method="POST">
+                <input type="hidden" name="back" value="true">
+                <input type="submit" value="Back">
+            </form>
+        {% else %}
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <input type="file" name="file" required>
+                <br><br>
+                <input type="submit" value="Upload">
+            </form>
+        {% endif %}
+    
+</body>
+</html>
