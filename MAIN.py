@@ -2,10 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for
 import PyPDF2
 import openai
 
-openai.api_key = '-your key-'
+openai.api_key = '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'
 
 app = Flask(__name__)
-
 
 file_uploaded = False
 text = ""
@@ -35,7 +34,7 @@ def extract_text_from_pdf(filename):
         for page in pdf_reader.pages:
             text += page.extract_text()
         return text
-    
+
 @app.route('/ask', methods=['POST'])
 def ask_question():
     global conversation_history
@@ -51,6 +50,13 @@ def ask_question():
 
     return redirect(url_for('upload'))
 
+@app.route('/back', methods=['POST'])
+def go_back():
+    global file_uploaded
+    global conversation_history
+    file_uploaded = False
+    conversation_history = []
+    return redirect(url_for('upload'))
 
 def chat_with_gpt(text, question):
     global conversation_history
